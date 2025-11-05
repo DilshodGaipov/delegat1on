@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/>
+<title>DELEGAT1ON — Documentation</title>
+<link rel="stylesheet" href="/download/resources/com.ddcorp.delegat1on:delegat1on-res/delegat1on.css"/>
+</head>
+<body class="dd-docs">
+<div class="dd-docs__header">
+  <img class="logo" src="/download/resources/com.ddcorp.delegat1on:delegat1on-res/logo.png" alt="DELEGAT1ON"/>
+  <h1>DELEGAT1ON — Documentation (1.0.8)</h1>
+</div>
+
+<h2>What’s new</h2>
+<ul>
+  <li>Categories & Permissions stored in PluginSettings (UI + REST)</li>
+  <li>Workflow respects permissions (field=assignee|reporter)</li>
+  <li>JQL optional arg: category filter</li>
+</ul>
+
+<h2>Getting Started</h2>
+<ol>
+  <li>Manage apps → enable modules</li>
+  <li>Open <code>/plugins/servlet/delegat1on/category</code> and add categories</li>
+  <li>Open <code>/plugins/servlet/delegat1on/permissions</code> and toggle permissions</li>
+  <li>Open <code>/plugins/servlet/delegat1on/configforadmin</code> to add delegations</li>
+</ol>
+
+<h2>Workflow</h2>
+<p>Add <em>User is Delegate of</em> condition or <em>Assign to Delegate of</em> post-function. Option <code>field=assignee|reporter</code>.</p>
+
+<h2>JQL</h2>
+<pre>assignee in delegatesOf(currentUser(), "Vacation")
+reporter in delegatorsOf("alice")</pre>
+
+<h2>REST</h2>
+<ul>
+  <li>GET <code>/rest/delegat1on/1.0/records?active=1</code></li>
+  <li>GET <code>/rest/delegat1on/1.0/categories</code>, POST/DELETE</li>
+  <li>GET <code>/rest/delegat1on/1.0/perms</code>, PUT</li>
+</ul>
+</body></html>

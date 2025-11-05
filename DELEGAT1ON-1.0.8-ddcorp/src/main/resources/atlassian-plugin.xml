@@ -1,0 +1,73 @@
+<atlassian-plugin key="com.ddcorp.delegat1on" name="DELEGAT1ON — Delegate Manager" plugins-version="2">
+  <plugin-info>
+    <description>Delegation helper for Jira DC: UI pages, workflow condition/post-function, REST and JQL.</description>
+    <version>1.0.8-ddcorp</version>
+    <vendor name="dd CORP" url="https://dd-corp.example" />
+    <param name="atlassian-data-center-compatible">true</param>
+  </plugin-info>
+
+  <resource type="i18n" name="i18n" location="i18n/delegat1on"/>
+  <web-resource key="delegat1on-res" name="DELEGAT1ON Resources">
+    <resource type="download" name="logo.png" location="images/logo.png"/>
+    <resource type="download" name="delegat1on.css" location="css/delegat1on.css"/>
+    <context>atl.general</context>
+  </web-resource>
+
+  <web-section key="dd-admin-section" name="DELEGAT1ON" location="admin_plugins_menu" weight="100"/>
+  <web-item key="dd-get-started" section="dd-admin-section" weight="10">
+    <name>Get Started</name>
+    <link>/plugins/servlet/delegat1on/getstarted</link>
+  </web-item>
+  <web-item key="dd-permissions" section="dd-admin-section" weight="20">
+    <name>Permissions</name>
+    <link>/plugins/servlet/delegat1on/permissions</link>
+  </web-item>
+  <web-item key="dd-categories" section="dd-admin-section" weight="30">
+    <name>Categories</name>
+    <link>/plugins/servlet/delegat1on/category</link>
+  </web-item>
+  <web-item key="dd-admin-delegations" section="dd-admin-section" weight="40">
+    <name>Delegations (Admin)</name>
+    <link>/plugins/servlet/delegat1on/configforadmin</link>
+  </web-item>
+  <web-item key="dd-docs" section="dd-admin-section" weight="50">
+    <name>Documentation</name>
+    <link>/plugins/servlet/delegat1on/docs</link>
+  </web-item>
+
+  <web-section key="dd-user-section" name="Delegations" location="system.user.options" weight="250"/>
+  <web-item key="dd-user-delegations" section="dd-user-section" weight="10">
+    <name>Delegations (User)</name>
+    <link>/plugins/servlet/delegat1on/configforuser</link>
+  </web-item>
+
+  <servlet key="get-started-servlet" name="Get Started" class="com.ddcorp.delegat1on.web.GetStartedServlet">
+    <url-pattern>/delegat1on/getstarted</url-pattern>
+  </servlet>
+  <servlet key="docs-servlet" name="Documentation" class="com.ddcorp.delegat1on.web.DocsServlet">
+    <url-pattern>/delegat1on/docs</url-pattern>
+  </servlet>
+  <servlet key="admin-servlet" name="Admin Delegations" class="com.ddcorp.delegat1on.web.AdminServlet">
+    <url-pattern>/delegat1on/configforadmin</url-pattern>
+  </servlet>
+  <servlet key="user-servlet" name="User Delegations" class="com.ddcorp.delegat1on.web.UserServlet">
+    <url-pattern>/delegat1on/configforuser</url-pattern>
+  </servlet>
+  <servlet key="perm-servlet" name="Permissions" class="com.ddcorp.delegat1on.web.PermissionsServlet">
+    <url-pattern>/delegat1on/permissions</url-pattern>
+  </servlet>
+  <servlet key="cat-servlet" name="Categories" class="com.ddcorp.delegat1on.web.CategoryServlet">
+    <url-pattern>/delegat1on/category</url-pattern>
+  </servlet>
+
+  <workflow-condition key="delegation-workflow-condition" name="User is Delegate of" class="com.ddcorp.delegat1on.workflow.IsDelegateOfCondition"/>
+  <workflow-function key="delegation-workflow-postfunction" name="Assign to Delegate of" class="com.ddcorp.delegat1on.workflow.AssignToDelegatePostFunction" type="post-function"/>
+
+  <rest key="delegat1on-rest" path="delegat1on" version="1.0">
+    <description>REST for delegations, categories and permissions.</description>
+    <package>com.ddcorp.delegat1on.rest</package>
+  </rest>
+
+  <jql-function key="delegatesOf-function" name="delegatesOf" class="com.ddcorp.delegat1on.jql.DelegatesOfFunction"/>
+  <jql-function key="delegatorsOf-function" name="delegatorsOf" class="com.ddcorp.delegat1on.jql.DelegatorsOfFunction"/>
+</atlassian-plugin>
