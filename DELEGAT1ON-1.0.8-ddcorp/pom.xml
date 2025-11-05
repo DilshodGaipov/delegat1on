@@ -131,6 +131,10 @@
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
+          <!-- Временно отключаем JQL-функции, чтобы собрать рабочий JAR -->
+          <excludes>
+            <exclude>com/ddcorp/delegat1on/jql/**</exclude>
+          </excludes>
         </configuration>
       </plugin>
 
