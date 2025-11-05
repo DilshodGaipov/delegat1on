@@ -16,6 +16,45 @@ jobs:
           java-version: '11'
           cache: maven
 
+      # Добавляем settings.xml с репозиториями Atlassian + Central
+      - name: Add Maven settings (Atlassian repo)
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<'XML'
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <profiles>
+              <profile>
+                <id>use-atlassian</id>
+                <repositories>
+                  <repository>
+                    <id>atlassian-public</id>
+                    <url>https://packages.atlassian.com/maven-public/</url>
+                  </repository>
+                  <repository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                  </repository>
+                </repositories>
+                <pluginRepositories>
+                  <pluginRepository>
+                    <id>atlassian-public</id>
+                    <url>https://packages.atlassian.com/maven-public/</url>
+                  </pluginRepository>
+                  <pluginRepository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                  </pluginRepository>
+                </pluginRepositories>
+              </profile>
+            </profiles>
+            <activeProfiles>
+              <activeProfile>use-atlassian</activeProfile>
+            </activeProfiles>
+          </settings>
+          XML
+
       - name: Build with Maven (subfolder)
         run: mvn -U -DskipTests -f DELEGAT1ON-1.0.8-ddcorp/pom.xml package
 
