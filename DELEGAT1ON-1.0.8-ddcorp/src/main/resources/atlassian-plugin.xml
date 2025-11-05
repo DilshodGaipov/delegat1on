@@ -68,6 +68,9 @@
     <package>com.ddcorp.delegat1on.rest</package>
   </rest>
 
-  <jql-function key="delegatesOf-function" name="delegatesOf" class="com.ddcorp.delegat1on.jql.DelegatesOfFunction"/>
+  <!-- JQL функции временно отключены для успешной сборки -->
+  <!--
+  <jql-function key="delegatesOf-function"  name="delegatesOf"  class="com.ddcorp.delegat1on.jql.DelegatesOfFunction"/>
   <jql-function key="delegatorsOf-function" name="delegatorsOf" class="com.ddcorp.delegat1on.jql.DelegatorsOfFunction"/>
+  -->
 </atlassian-plugin>
